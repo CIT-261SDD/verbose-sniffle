@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Video</title>
+</head>
+    
+<body>
+    <h1>Video</h1>
+    <nav>
+    <a href="../index.html">Home</a>
+    <a href="main.html">HTML</a>
+    </nav><br>
+        <p>Happy path</p>
+        <video controls height="200" width="400">
+            <source src="source/lastDays.mp4" type="video/mp4">
+        </video><br>
+        <!-- MP4, IS the supported file types-->
+        
+        <!-- Including multiple source elements will allow the browser to select whichever format it would like-->
+    
+        <p>Happy path: autoplay with controls</p>
+        <video height="200" width="400" controls>
+            <source src="source/lastDays.mp4" type="video/mp4">
+        </video><br>
+            
+        <p>Angry path... don't include controls</p>
+        <video height="200" width="400">
+            <source src="source/lastDays.mp4" type="video/mp4">
+        </video><br>
+        <!-- cannot start the video!! -->
+    
+        <p>Angry path - the source is an audio file</p>
+        <video controls height="200" with="400">
+            <source src="source/train.mp3" type="audio/mp3">
+            <source src="source/train.wav" type="video/wav">
+        </video>
+        <!-- results: if type is omitted the files plays without an image. If type is set to video the windows loads, but is innactive -->
+       
+        <p>Angry Path: Missing source tag</p>
+        <video controls>
+        </video>
+        <!-- Results: video box appreas w/out focus. cannot be edited-->
+    
+        <p>Angry Path: source is a word document</p>
+        <video controls>
+            <source src="source/words.docx">
+        </video>
+        <!-- Result: Same as above-->
+    
+        <p>Angry Path: source is an empty string</p>
+        <video controls>
+            <source src="">
+        </video>
+        <!-- Results: Same as above-->
+    
+        <p>Angry Path: source is a jpg</p>
+        <video controls>
+            <source src="source/camaro.jpg">
+        </video>
+        <!-- Results: Same as above-->
+</body>
+</html>
