@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Properties sandboxing</title>
+	<script>
+	function propSB() {
+
+		//Happy Path: I have a variable with several different properties.  I call these properties in a line of text.  Now if any of the properties change I can change it only in the variable and they will change in all other instance in which they are called.
+		var bike1 = {
+			frame:"carbon",
+			handleBars:"drop",
+			wheels:"road",
+			seat:"racing",
+			color:"red"
+		};
+		document.write("<strong>Example 1</strong><br>");
+		document.write("My bike is a " + bike1.color + " " + bike1.frame + " with " + bike1.wheels + " wheels and a " + bike1.seat + " seat and " + bike1.handleBars + " handle bars.<br><br>");
+		//Result: All of the properties turn up in the places where I called them.
+
+		//Happy Path: 
+		var bike2 = {
+			frame:"carbon",
+			handleBars:"drop",
+			wheels:"road",
+			seat:"racing",
+			color:"red"
+		};
+		document.write("<strong>Example 2</strong><br>");
+		document.write("My bike is a " + bike2.color + " " + bike2.frame + " with " + bike2.wheels + " wheels and a " + bike2.seat + " seat and " + bike2.handleBars + " handle bars.<br><br>");
+		//Result: 
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="propSB();">
+
+	
+
+</body>
+</html>
