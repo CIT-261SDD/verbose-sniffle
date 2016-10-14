@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Loop sandboxing</title>
+	<script>
+	function loopTests() {
+	
+		var names = ["Blank", "Sally", "James", "Betty", "Yohan", "Jack"];
+		var a = 1;
+		var length = names.length;
+
+	//Happy Path - Loop displaying the items in an array
+		var text = "";
+		for (; a < length; ) {
+			text += "Name number " + a + " is " + names[a] + ".<br>";
+			a++;
+		}
+		document.getElementById("para1").innerHTML = text;
+	//Result - Correct items Displayed with the text provided.
+
+	//Nasty Path - Starting on different number for "i" variable
+		var b = 3;
+		var text1 = "";
+		for (; b < length; ) {
+			text1 += "Name number " + b + " is " + names[b] + ".<br>";
+			b++;
+		}
+		document.getElementById("para2").innerHTML = text1;
+	//Result - List starts at a different point.
+
+	//Nasty Path - Starting on  number for "i" variable that is larger than the length of the array.
+		var c = 7;
+		var text2 = "";
+		for (; c < length; ) {
+			text2 += "Name number " + c + " is " + names[c] + ".<br>";
+			c++;
+		}
+		document.getElementById("para3").innerHTML = text2;
+	//Result - Nothing is displayed.
+
+	//Nasty Path - Starting with a negative number for "i" variable
+		var d = -3;
+		var text3 = "";
+		for (; d < length; ) {
+			text3 += "Name number " + d + " is " + names[d] + ".<br>";
+			d++;
+		}
+		document.getElementById("para4").innerHTML = text3;
+	//Result - Starts with the negative number and counts up showing undefined till it gets to the array/ 0
+
+	//Nasty Path - Entered: "for (; e = length; )" part of the loop logic and a loop was created and crashed the browser.
+	// same thing happened when I entered: "for (; length; )", "for (; ; )"
+
+//		var e = 1;
+//		var text4 = "";
+//		for (; e = length; ) {
+//			text4 += "Name number " + e + " is " + names[e] + ".<br>";
+//			e++;
+//		}
+//		document.getElementById("para5").innerHTML = text4;
+
+	//Result - Browser crashed in every instance
+
+	//Nasty Path - Took one of the plus signs out for the loop (I also changed the less than sign to a greater than sign so the loop would not show up on the web page since it failed)
+		var f = -3;
+		var text4 = "";
+		for (; f > length; ) {
+			text4 += "Name number " + f + " is " + names[f] + ".<br>";
+			f++; //f+
+		}
+		document.getElementById("para6").innerHTML = text4;
+	//Result - All of the arrays in the document disappeared.  The page did not crash but all of the arrays disappeared.
+
+	//Nasty Path - Changed the "g++" to a "g--" (I also changed the less than sign to a greater than sign so the loop would not show up on the web page since it failed)
+		var g = -3;
+		var text5 = "";
+		for (; g > length; ) {
+			text5 += "Name number " + g + " is " + names[g] + ".<br>";
+			g++; //g--
+		}
+		document.getElementById("para7").innerHTML = text5;
+	//Result - The entire page crashed.
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+<h3>Loop sandboxing</h3>
+	<h4>Loop ex. 1</h4><p id="para1"></p>
+	<h4>Loop ex. 2</h4><p id="para2"></p>
+	<h4>Loop ex. 3</h4><p id="para3"></p>
+	<h4>Loop ex. 4</h4><p id="para4"></p>
+	<h4>Loop ex. 5</h4><p id="para5"></p>
+	<h4>Loop ex. 6</h4><p id="para6"></p>
+	<h4>Loop ex. 7</h4><p id="para7"></p>
+
+</body>
+</html>

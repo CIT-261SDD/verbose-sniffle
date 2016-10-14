@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Loop sandboxing</title>
+	<script>
+	function loopTests() {
+		
+	//Happy Path - If then statement checking to see if variable is less than 9
+		var textz = "";
+		var z = 0;
+		while (z < 8) {
+			textz += "<br>Number " + z;
+			z++;
+		}
+		document.write("<h4>Happy Path</h4>")
+		document.write(textz);
+	//Result - Displays txt showing that the variable is either less than or more than 9.
+
+	//Nasty Path - Took out the ")" on line 23 after the number 8
+		var texta = "";
+		var a = 0;
+		// while (a < 8 {
+		// 	texta += "<br>Number " + a;
+		// 	a++;
+		// }
+		document.write("<h4>Nasty Path a</h4>")
+		document.write(texta);
+	//Result - All of the text on the page disapeared
+
+	//Nasty Path - Added a second < on line 34
+		var textb = "";
+		var b = 0;
+		while (b << 8) {
+			textb += "<br>Number " + b;
+			b++;
+		}
+		document.write("<h4>Nasty Path b</h4>")
+		document.write(textb);
+	//Result - The loop did not run
+
+	//Nasty Path - Added 5 spaces on line 45 after the first "("
+		var textc = "";
+		var c = 0;
+		while (     c < 8) {
+			textc += "<br>Number " + c;
+			c++;
+		}
+		document.write("<h4>Nasty Path c</h4>")
+		document.write(textc);
+	//Result - The loop ran just fine
+
+	//Nasty Path - Added a second ";" at the end of line 57 
+		var textd = "";
+		var d = 0;
+		while (d < 8) {
+			textd += "<br>Number " + d;;
+			d++;
+		}
+		document.write("<h4>Nasty Path d</h4>")
+		document.write(textd);
+	//Result - The loop ran just fine
+
+	//Nasty Path - Added a second "+"" on line 68
+		var texte = "";
+		var e = 0;
+		// while (e < 8) {
+		// 	texte ++= "<br>Number " + e;
+		// 	e++;
+		// }
+		document.write("<h4>Nasty Path e</h4>")
+		document.write(texte);
+	//Result - All of the text on the page vanished
+
+	//Nasty Path - Added the word "for" on line 78
+		var textf = "";
+		var f = 0;
+		// while for (f < 8) {
+		// 	textf += "<br>Number " + f;
+		// 	f++;
+		// }
+		document.write("<h4>Nasty Path f</h4>")
+		document.write(textf);
+	//Result - All of the text on the page vanished
+
+	//Nasty Path - Took away the ";" from the end of line 91
+		var textg = "";
+		var g = 0;
+		while (g < 8) {
+			textg += "<br>Number " + g;
+			g++
+		}
+		document.write("<h4>Nasty Path g</h4>")
+		document.write(textg);
+	//Result - The loop ran normally
+
+	//Nasty Path - On line 100 stated that "while (h=8)"
+		var texth = "";
+		var h = 0;
+		// while (h = 8) {
+		// 	texth += "<br>Number " + h;
+		// 	h++;
+		// }
+		document.write("<h4>Nasty Path h</h4>")
+		document.write(texth);
+	//Result - Created an eternal loop
+
+	//Nasty Path - On line 111 put i > 8
+		var texti = "";
+		var i = 0;
+		while (i > 8) {
+			texti += "<br>Number " + i;
+			i++;
+		}
+		document.write("<h4>Nasty Path i</h4>")
+		document.write(texti);
+	//Result - The loop simply did not run
+
+	
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+	
+
+</body>
+</html>

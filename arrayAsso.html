@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Associative Array sandboxing</title>
+	<script>
+
+	function loopTests() {
+
+	//Happy Path: 	Created an associative array
+	var apple1 = [];
+	apple1["first"] = "Example 1";
+	apple1["second"] = "Dead";
+	apple1["third"] = "Yellow";
+	apple1["forth"] = "Green";
+	apple1["fith"] = "Red";
+
+document.write("<strong>" + apple1.first + "</strong><br>");
+document.write(apple1.third + "<br>");
+document.write(apple1.forth + "<br><br>");
+	//Result: Displays the items in the array when asking for them by the assinged name instead of number.
+
+	//Nasty Path: Asked for the length of the array on line 33
+	var apple2 = [];
+	apple2["first"] = "Example 2";
+	apple2["second"] = "Dead";
+	apple2["third"] = "Yellow";
+	apple2["forth"] = "Green";
+	apple2["fith"] = "Red";
+
+document.write("<strong>" + apple2.first + "</strong><br>");
+document.write(apple2.third + "<br>");
+document.write(apple2.length + "<br><br>");
+	//Result: Told me that the array is 0 long
+
+	//Nasty Path: Asked for the second spot in the array on line 46
+	var apple3 = [];
+	apple3["first"] = "Example 3";
+	apple3["second"] = "Dead";
+	apple3["third"] = "Yellow";
+	apple3["forth"] = "Green";
+	apple3["fith"] = "Red";
+
+document.write("<strong>" + apple3.first + "</strong><br>");
+document.write(apple3.third + "<br>");
+document.write(apple3[2] + "<br><br>");
+	//Result: Showed undefined because this array can no longer be associated by with numbers.
+
+	//Nasty Path: 
+	var apple4 = [];
+	apple4["first"] = "Example 4";
+	apple4[second] = "Dead";
+	apple4["third"] = "Yellow";
+	apple4["forth"] = "Green";
+	apple4["fith"] = "Red";
+
+document.write("<strong>" + apple4.first + "</strong><br>");
+document.write(apple4.third + "<br>");
+document.write(apple4.forth + "<br><br>");
+	//Result: 
+
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+	
+
+</body>
+</html>

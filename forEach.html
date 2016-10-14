@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Loop sandboxing</title>
+
+</head>
+
+
+<button onclick="testArray.forEach(loopFunction1)">Click here</button>
+<p id="test1"></p>
+
+<!--Nasty Path - Put quotation marks around the name of the function for the forEach loop -->
+<button onclick="testArray.forEach("loopFunction2")">Click here</button>
+<p id="test2"></p>
+<!--Result - Nothing was displayed when the coresponding button was pressed. -->
+
+<!--Nasty Path - Left out the . between the name of the array and forEach -->
+<button onclick="testArrayforEach(loopFunction3)">Click here</button>
+<p id="test3"></p>
+<!--Result - Nothing was displayed when the coresponding button was pressed. -->
+
+<!--Nasty Path - Did not capitalize the e on forEach -->
+<button onclick="testArray.foreach(loopFunction4)">Click here</button>
+<p id="test4"></p>
+<!--Result - Nothing was displayed when the coresponding button was pressed. -->
+
+<script>
+
+var testArray = [4, 9, 16, 25];
+
+//Happy Path: forEach loop being called in the button in the HTML. Array is in script and function contains the formatting for what will be looped pulling from the array.
+testp1 = document.getElementById("test1");
+function loopFunction1(item, index) {
+    testp1.innerHTML = testp1.innerHTML + "index[" + index + "]: " + item + "<br />";
+    }
+//Result: The array is shown as the forEach runs though each number in the loop
+
+    testp2 = document.getElementById("test2");
+function loopFunction2(item, index) {
+    testp2.innerHTML = testp2.innerHTML + "index[" + index + "]: " + item + "<br />";
+    }
+
+    testp3 = document.getElementById("test3");
+function loopFunction3(item, index) {
+    testp3.innerHTML = testp3.innerHTML + "index[" + index + "]: " + item + "<br />";
+    }
+
+    testp4 = document.getElementById("test4");
+function loopFunction4(item, index) {
+    testp4.innerHTML = testp4.innerHTML + "index[" + index + "]: " + item + "<br />";
+    }
+</script>
+
+	
+
+</body>
+</html>

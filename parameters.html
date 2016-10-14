@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Parameter sandboxing</title>
+	<script>
+
+//Happy Path: Created a function with 2 blank parameters, the function then returns whatever the answer is multiplying the two parameters together.
+	function parameterTesting1(b, c) {
+    var a = b * c
+    
+    return a;
+}
+document.write("This is example 1<br>")
+document.write(parameterTesting1(4, 6));
+//Result: In the doc.write there are two numbers which are assinged to the parameters and the answer of the function using these numbers are displayed.
+
+//Nasty Path: Added a 3rd parameter to see what the effect would be
+	function parameterTesting2(b, c, d) {
+    var a = b * c
+    
+    return a;
+}
+document.write("<br><br>This is example 2<br>")
+document.write(parameterTesting2(4, 6));
+//Result: It was ignored and parameters b and c were still assinged and used.
+
+//Nasty Path: This time I added a 3rd value to line 35 to be assinged to a parameter without having a 3rd parameter in the function
+	function parameterTesting3(b, c) {
+    var a = b * c
+    
+    return a;
+}
+document.write("<br><br>This is example 3<br>")
+document.write(parameterTesting3(4, 6, 7));
+//Result: The value was ignored and the first two were used only.
+
+//Nasty Path: In line 39 I put the parameters in quotes
+// 	function parameterTesting3("b", "c") {
+//     var a = b * c
+    
+//     return a;
+// }
+document.write("<br><br>This is example 4<br>")
+// document.write(parameterTesting3(4, 6));
+//Result: All of the text on the page vanished.
+
+//Nasty Path: This time I put the values that were to be assinged to the parameters in line 55 in quotes
+	function parameterTesting5(b, c) {
+    var a = b * c
+    
+    return a;
+}
+document.write("<br><br>This is example 5<br>")
+document.write(parameterTesting5("4", "6"));
+//Result: They were still accepted as normal and the multipled answer was displayed.
+
+//Nasty Path: I took out the comma between the parameters on line 59
+// 	function parameterTesting6(b c) {
+//     var a = b * c
+    
+//     return a;
+// }
+document.write("<br><br>This is example 6<br>")
+// document.write(parameterTesting6(4, 6));
+//Result: All of the text on the page vanished.
+
+//Nasty Path: Put a > character in for one of the values to be assinged to a variable on line 75
+	function parameterTesting7(b, c) {
+    var a = b * c
+    
+    return a;
+}
+document.write("<br><br>This is example 7<br>")
+// document.write(parameterTesting7(4, >));
+//Result: All of the text on the page crashed.
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+	
+
+</body>
+</html>

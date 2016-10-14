@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Loop sandboxing</title>
+	<script>
+	function loopTests() {
+		
+	//Happy Path - Declaring a couple of variable, some with numbers and others with strings of text.  I add some of the variables within another variable and then write that variable to the screen.
+		var a1 = 3;
+		var b1 = 6;
+		var c1 = " this is the sum of the two variables";
+		var d1;
+
+		d1 = a1 + b1 + c1;
+
+		document.write("<br><h4>Example 1</h4>" + a1 + " is the first variable.<br>" + b1 + " is the second variable.<br><br>")
+		document.write(d1);
+	//Result - The variables that I asked to be written were with the desired content within them.
+
+	//Nasty Path - I put an = sign inbetween the first var and the variable a2
+		//var = a2 = 3;
+		var a2 = 3;
+		var b2 = 6;
+		var c2 = " this is the sum of the two variables";
+		var d2;
+
+		d2 = a2 + b2 + c2;
+
+		document.write("<br><h4>Example 2</h4>" + a2 + " is the first variable.<br>" + b2 + " is the second variable.<br><br>")
+		document.write(d2);
+	//Result - All of the text on the page vanished so I commented it out.  I then readded the variable below the comment because the rest of the examples after example 1 vanished.
+
+	//Nasty Path - I turned the variable b into a string
+		var a3 = 3;
+		var b3 = "6";
+		var c3 = " this is the sum of the two variables";
+		var d3;
+
+		d3 = a3 + b3 + c3;
+
+		document.write("<br><h4>Example 3</h4>" + a3 + " is the first variable.<br>" + b3 + " is the second variable.<br><br>")
+		document.write(d3);
+	//Result - It was not added on as a number anymore but as a character.
+
+	//Nasty Path - I took away the quotes from the string variable c
+		var a4 = 3;
+		var b4 = 6;
+		//var c4 = this is the sum of the two variables;
+		var c4 = " this is the sum of the two variables";
+		var d4;
+
+		d4 = a4 + b4 + c4;
+
+		document.write("<br><h4>Example 4</h4>" + a4 + " is the first variable.<br>" + b4 + " is the second variable.<br><br>")
+		document.write(d4);
+	//Result - All of the text on the page vanished.  I commented out that line and then the rest of the functions after that line did not work.  So I added back in the correct code under the comment.
+
+	//Nasty Path - I took away line 63 where variable d was declared
+		var a5 = 3;
+		var b5 = 6;
+		var c5 = " this is the sum of the two variables";
+		
+
+		d5 = a5 + b5 + c5;
+
+		document.write("<br><h4>Example 5</h4>" + a5 + " is the first variable.<br>" + b5 + " is the second variable.<br><br>")
+		document.write(d5);
+	//Result - nothing happened, everything ran as it did before.
+
+	
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+	
+
+</body>
+</html>

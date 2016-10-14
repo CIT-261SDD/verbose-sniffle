@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Object sandboxing</title>
+	<script>
+	function objectCreators() {
+
+		// Happy path: This is a function that creates an object that can be used to combine certain objects in the function
+		var watch1 = {
+			face: "Round",
+			color: "White",
+			watchDetails: function() {
+				return this.face + " " + this.color;
+			}
+		}
+		document.write("<strong>Example 1</strong><br>This watch has a ")
+		document.write(watch1.watchDetails() + " style.<br><br>");
+		//Result: The objects desired are combined with the function that calls them together.
+
+		//Nasty path: Took out one of the "."s on line 26
+		//  var watch2 = {
+		// 	face: "Round",
+		// 	color: "White",
+		// 	watchDetails: function() {
+		// 		return thisface + " " + this.color;
+		// 	}
+		// }
+		document.write("<strong>Example 2</strong><br>This watch has a <br><br>")
+		// document.write(watch2.watchDetails() + " style.<br><br>");
+		//Result: the function did not display anything after the function, had to comment it out to show the rest of the examples
+
+		//Nasty path: Took out the object function name from line 34 on line 42
+		 var watch3 = {
+			face: "Round",
+			color: "White",
+			watchDetails: function() {
+				return this.face + " " + this.color;
+			}
+		}
+		document.write("<strong>Example 3</strong><br>This watch has a <br><br>")
+		// document.write(watchDetails() + " style.<br><br>");
+		//Resutl: The function did not display anything after the function, had to comment it out to show the rest of the examples
+
+		//Nasty path: put a number in the brackets on line 49
+ 	// 	var watch4 = {
+		// 	face: "Round",
+		// 	color: "White",
+		// 	// watchDetails: function(2) {
+		// 		return this.face + " " + this.color;
+		// 	}
+		// }
+		document.write("<strong>Example 4</strong><br>This watch has a <br><br>")
+		// document.write(watch4.watchDetails() + " style.<br><br>");
+		//Result: Crashed the whole page, had to comment it out.
+
+		//Nasty path: Put a symbol in the brackets on line 66
+ 		var watch5 = {
+			face: "Round",
+			color: "White",
+			watchDetails: function() {
+				return this.face + " " + this.color;
+			}
+		}
+		document.write("<strong>Example 5</strong><br>This watch has a <br><br>")
+		// document.write(watch5.watchDetails(=) + " style.<br><br>");
+		//Result: Crashed the whole page, had to comment it out.
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="objectCreators();">
+
+	
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Loop sandboxing</title>
+	<script>
+	function loopTests() {
+		
+	//Happy Path - If then statement checking to see if variable is less than 9
+		var a = 0;
+		var display1;
+		if (a < 9) {
+			display1 = "less than 9";
+		} else {
+			display1 = "more than 9";
+		}
+		document.write("Example #1: ");
+		document.write(display1);
+		document.write("<br>");
+	//Result - Displays txt showing that the variable is either less than or more than 9.
+
+	//Nasty Path - Took out the less than sign
+		var b = 0;
+		var display2;
+		// if (b  9) {
+		// 	display2 = "less than 9";
+		// } else {
+		// 	display2 = "more than 9";
+		// }
+		document.write("Example #2: ");
+		document.write(display2);
+		document.write("<br>");
+	//Result - All of the text on the whole page was erased.
+
+	//Nasty Path - Took out the "else"
+		var c = 0;
+		var display3;
+		if (c < 9) {
+			display3 = "less than 9";
+		}  {
+			display3 = "more than 9";
+		}
+		document.write("Example #3: ");
+		document.write(display3);
+		document.write("<br>");
+	//Result - Displays the last variation of the display3 variable.  I believe that it just goes with the last iteration of the variable instead of using the intended logic.
+
+	//Nasty Path - Took away first curly bracket after the if then statement
+		var d = 0;
+		var display4;
+		// if (d < 9) 
+		// 	display4 = "less than 9";
+		// } else {
+		// 	display4 = "more than 9";
+		// }
+		document.write("Example #4: ");
+		document.write(display4);
+		document.write("<br>");
+	//Result - All of the text vanished on the page.
+
+	//Nasty Path - Took away the variable after the less than sign in the if then statement.
+		var e;
+		var display5;
+		// if (e < ) {
+		// 	display5 = "less than 9";
+		// } else {
+		// 	display5 = "more than 9";
+		// }
+		document.write("Example #5: ");
+		document.write(display5);
+		document.write("<br>");
+	//Result - Took away all of the text on the page.
+
+	//Nasty Path - Capitalized the i on the if then statement word "if"
+		var f;
+		var display6;
+		// If (f < 9) {
+		// 	display6 = "less than 9";
+		// } else {
+		// 	display6 = "more than 9";
+		// }
+		document.write("Example #6: ");
+		document.write(display6);
+		document.write("<br>");
+	//Result - All of the text vanished on the page.
+
+	//Nasty Path - Changed the if then to g || 9 instead of g < 9
+		var g = 0;
+		var display7;
+		if (g || 9) {
+			display7 = "less than 9";
+		} else {
+			display7 = "more than 9";
+		}
+		document.write("Example #7: ");
+		document.write(display7);
+		document.write("<br>");
+	//Result - Displayed the first condition as it was technically correct.
+
+	//Nasty Path - Put h < 9 > h for the if then statement
+		var h = 0;
+		var display8;
+		if (h < 9 > h) {
+			display8 = "less than 9";
+		} else {
+			display8 = "more than 9";
+		}
+		document.write("Example #8: ");
+		document.write(display8);
+		document.write("<br>");
+	//Result - Showed correctly even thought the logic is redudent.
+
+	//Nasty Path - took away the spaces ie. (i<9)
+		var i = 0;
+		var display9;
+		if (i<9) {
+			display9 = "less than 9";
+		} else {
+			display9 = "more than 9";
+		}
+		document.write("Example #9: ");
+		document.write(display9);
+		document.write("<br>");
+	//Result - Displayed the correct answer as if it was to be normal
+
+// if (5); if (null)
+
+
+
+
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+	
+
+</body>
+</html>
