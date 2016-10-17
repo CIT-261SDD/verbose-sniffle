@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Json Parse sandboxing</title>
+	<script>
+	function testingJsonParse() {
+		
+	//Happy Path: Created JSON Parse that works just like XLS but is simpler to use.  The parse allows certian objects to be contained like a database where everything is called and stored in a hierarchal way.       JSON is a datatransport protocol   *** I need to go through the JSON.Parse and JSON.Stringify and compare then against eachother, use consol.log to see results
+	var dataz = { "mugs": [
+	{"type": "handled", "color": "red", "height": "80mm"},
+	{"type": "teacup", "color": "blue", "height": "70mm"},
+	{"type": "saucer", "color": "grey", "height": "75mm"},
+	{"type": "shot glass", "color": "breen", "height": "40mm"},
+	]
+};
+	document.write("<h4>Example 1</h4>");
+	document.write(
+		"The first mug is a " + dataz.mugs[0].type + " type, " + dataz.mugs[0].color + ", and is " + dataz.mugs[0].height + " tall.<br>" +
+		"The second mug is a " + dataz.mugs[1].type + " type, " + dataz.mugs[1].color + ", and is " + dataz.mugs[1].height + " tall.<br>" +
+		"The third mug is a " + dataz.mugs[2].type + " type, " + dataz.mugs[2].color + ", and is " + dataz.mugs[2].height + " tall.<br>" +
+		"The forth mug is a " + dataz.mugs[3].type + " type, " + dataz.mugs[3].color + ", and is " + dataz.mugs[3].height + " tall.<br><br>");
+	//Result:  I used the doc.write to call different aspects of the JSON Parse and they were displayed on the page.
+
+	//Nasty Path: On line 26 I took away the : after "mugs"
+// 	var data2 = { "mugs" [
+// 	{"type": "handled", "color": "red", "height": "80mm"},
+// 	{"type": "teacup", "color": "blue", "height": "70mm"},
+// 	{"type": "saucer", "color": "grey", "height": "75mm"},
+// 	{"type": "shot glass", "color": "breen", "height": "40mm"},
+// 	]
+// };
+ 	document.write("<h4>Example 2</h4>");
+// 	document.write(
+// 		"The first mug is a " + data2.mugs[0].type + " type, " + data2.mugs[0].color + ", and is " + data2.mugs[0].height + " tall.<br>" +
+// 		"The second mug is a " + data2.mugs[1].type + " type, " + data2.mugs[1].color + ", and is " + data2.mugs[1].height + " tall.<br>" +
+// 		"The third mug is a " + data2.mugs[2].type + " type, " + data2.mugs[2].color + ", and is " + data2.mugs[2].height + " tall.<br>" +
+// 		"The forth mug is a " + data2.mugs[3].type + " type, " + data2.mugs[3].color + ", and is " + data2.mugs[3].height + " tall.<br><br>");
+	//Result: All of the text on the page crashed.
+
+	//Nasty Path: Took away the quotations on line 42 around the word mugs
+	var data3 = { mugs: [
+	{"type": "curved", "color": "red", "height": "80mm"},
+	{"type": "teacup", "color": "blue", "height": "70mm"},
+	{"type": "saucer", "color": "grey", "height": "75mm"},
+	{"type": "shot glass", "color": "breen", "height": "40mm"},
+	]
+};
+	document.write("<h4>Example 3</h4>");
+	document.write(
+		"The first mug is a " + data3.mugs[0].type + " type, " + data3.mugs[0].color + ", and is " + data3.mugs[0].height + " tall.<br>" +
+		"The second mug is a " + data3.mugs[1].type + " type, " + data3.mugs[1].color + ", and is " + data3.mugs[1].height + " tall.<br>" +
+		"The third mug is a " + data3.mugs[2].type + " type, " + data3.mugs[2].color + ", and is " + data3.mugs[2].height + " tall.<br>" +
+		"The forth mug is a " + data3.mugs[3].type + " type, " + data3.mugs[3].color + ", and is " + data3.mugs[3].height + " tall.<br><br>");
+	//Result: Nothing happened, it worked as normal
+
+	//Nasty Path: Took away the ""s around the word teacup on line 60
+// 	var data4 = { "mugs": [
+// 	{"type": "handled", "color": "red", "height": "80mm"},
+// 	// {"type": teacup, "color": "blue", "height": "70mm"},
+// 	{"type": "saucer", "color": "grey", "height": "75mm"},
+// 	{"type": "shot glass", "color": "breen", "height": "40mm"},
+// 	]
+// };
+	document.write("<h4>Example 4</h4>");
+// 	document.write(
+// 		"The first mug is a " + data4.mugs[0].type + " type, " + data4.mugs[0].color + ", and is " + data4.mugs[0].height + " tall.<br>" +
+// 		"The second mug is a " + data4.mugs[1].type + " type, " + data4.mugs[1].color + ", and is " + data4.mugs[1].height + " tall.<br>" +
+// 		"The third mug is a " + data4.mugs[2].type + " type, " + data4.mugs[2].color + ", and is " + data4.mugs[2].height + " tall.<br>" +
+// 		"The forth mug is a " + data4.mugs[3].type + " type, " + data4.mugs[3].color + ", and is " + data4.mugs[3].height + " tall.<br><br>");
+	//Result: All of the data on the page dissapeared after the end of example 3, commented out to continue further nasty path tests
+
+
+//-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+//JSON.parse
+
+	//Happy Path: Create a parse from the JSON string
+	var data5 = '{"type":"metal","color":"white","height":["10 inches","25.4 cm"]}';
+	var parsed5 = JSON.parse(data5);
+	document.write("<h4>Example 5s</h4>");
+	document.write("It is a " + parsed5.color + " " + parsed5.type + " handle that is " + parsed5.height[1] + " or " + parsed5.height[0] + ".");
+	//Result: Displayed the object created from the string
+
+	//Nasty Path - Tried to pass Null in the parse
+	// var data6 = '{"type":NULL,"color":"white","height":["10 inches","26.4 cm"]}';
+	// var parsed6 = JSON.parse(data6);
+	document.write("<h4>Example 6s</h4>");
+	// document.write("It is a " + parsed6.color + " " + parsed6.type + " handle that is " + parsed6.height[1] + " or " + parsed6.height[0] + ".");
+	//Result - Came back as an unexpected identifier
+
+	//Nasty Path - Tried to pass a + sign in the parse
+	// var data7 = '{"type":+,"color":"white","height":["10 inches","25.4 cm"]}';
+	// var parsed7 = JSON.parse(data7);
+	document.write("<h4>Example 7s</h4>");
+	// document.write("It is a " + parsed7.color + " " + parsed7.type + " handle that is " + parsed7.height[1] + " or " + parsed7.height[0] + ".");
+	//Result - Sysnax error, unexped identifier, deleted everything after it on the page
+
+	//Nasty Path - Tried to parse the already objectified sting.
+	// var data8 = '{"type":"metal","color":"white","height":["10 inches","25.4 cm"]}';
+	// var parsed8 = JSON.parse(data8);
+	// var parseAParse = JSON.parse(parsed8);
+	document.write("<h4>Example 8s</h4>");
+	// document.write("It is a " + parsed8.color + " " + parsed8.type + " handle that is " + parsed8.height[1] + " or " + parsed8.height[0] + ".");
+	//Result - Was read as an unexpeded identifier, that it was already an object, crased the text from then on.
+
+	//-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+	//JSON.stringify
+
+	//Happy Path: Create a string from an array
+	var data9 = ["first","second","third","forth","last"];
+	var strung9 = JSON.stringify(data9);
+	document.write("<h4>Example 9s</h4>");
+	document.write(strung9);
+	//Result: Displayed the string
+
+	//Nasty Path - Stingify the stringified array
+	var data10 = ["first","second","third","forth","last"];
+	var strung10 = JSON.stringify(data10);
+	var doubleStrung1 = JSON.stringify(strung10);
+	document.write("<h4>Example 10s</h4>");
+	document.write(doubleStrung1);
+	//Result - It displayed the string a second time but with backslashes thoughout the text.
+
+	//Nasty Path - Stringify a null element
+	var data11 = ["first","second","third","forth","last",null];
+	var strung11 = JSON.stringify(data11);
+	document.write("<h4>Example 11s</h4>");
+	document.write(strung11);
+	//Result - displayed the word null.
+
+	//Nasty Path - Parsed the stringified stringified object
+	var data12 = ["first","second","third","forth","last"];
+	var strung12 = JSON.stringify(data12);
+	var doubleStrung2 = JSON.stringify(strung12);
+	var parseDoubleStrung = JSON.parse(doubleStrung2);
+	document.write("<h4>Example 12s</h4>");
+	document.write(parseDoubleStrung[1]);
+	//Result - the formating is off, now it displayes something undesired
+
+
+
+
+	}
+
+
+
+	</script>
+
+</head>
+
+<body onload="testingJsonParse();">
+
+	
+
+</body>
+</html>
