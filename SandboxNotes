@@ -1,13 +1,23 @@
 -- Brother Barney notes on what to inlcude in our sandoboxes
 
---HTM5 Video and audio
+--HTM5 Video/Audio/Canvas
 
-ONly need to use mp4 and mp3
+Video & Audio:
+Only need to use mp4 and mp3
 	What if the source is an empty string
 	What if the source tag is completely missing
 	What if the source is pointing to a word file/different file
 	What if you passed NULL
-	
+Canvas:
+	.moveTo / .lineTo null
+	.getContext() - try something other than "2d"
+	.fillText / .strokeText - draw a keyword
+	color stops - pass a number instead of a color
+	drawImg -try coping a video
+- there are a lot of methods used when working with canvas. 
+Throw in as manny funny parameters as you can.
+
+
 --JSON Parse
 
 Be sure to include what happens if you parse an object and stringify a string
