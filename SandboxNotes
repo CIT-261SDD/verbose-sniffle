@@ -1,0 +1,18 @@
+-- Brother Barney notes on what to inlcude in our sandoboxes
+
+--HTM5 Video and audio
+
+ONly need to use mp4 and mp3
+	What if the source is an empty string
+	What if the source tag is completely missing
+	What if the source is pointing to a word file/different file
+	What if you passed NULL
+	
+--JSON Parse
+
+Be sure to include what happens if you parse an object and stringify a string
+
+--Arrays
+
+Ideas on things that I should be changing - Push, pop, ship, unshift  array method (pop on empty array, push null)
+  
