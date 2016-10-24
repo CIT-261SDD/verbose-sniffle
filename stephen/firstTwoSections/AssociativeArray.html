@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Associative Array sandboxing</title>
+	<script>
+
+// Happy Path - Associative array with curly braces and dot notation
+	function loopTests() {
+		var apple1 = {pine:"pineapple", pen:"applepen", pinePen:"pineappleapplepen"};
+		document.getElementById("test1").innerHTML = apple1.pine;
+		// Result - The selected portion of the array is presented.
+
+// Nasty Path - Left out the = sign after the name of the array on line 15
+		// var apple2 {pine:"pineapple", pen:"applepen", pinePen:"pineappleapplepen"};
+		// document.getElementById("test2").innerHTML = apple2.pine;
+// Result - Broke the page, syntax error was holding back the function.
+
+// Nasty Path - Tried to call a null position in the associative array
+		var apple3 = {pine:null, pen:"applepen", pinePen:"pineappleapplepen"};
+		document.getElementById("test3").innerHTML = apple3.pine;
+		document.getElementById("test3").innerHTML = apple3.pen;
+// Result - Nothing was called
+
+// Nasty Path - Replaced {} with ()
+		// var apple4 = (pine:"pineapple", pen:"applepen", pinePen:"pineappleapplepen");
+		// document.getElementById("test4").innerHTML = apple4.pine;
+// Result - Gave me a sysntax error expecting something else.
+
+// Nasty Path - Added () around apple5.pine on line 32
+		var apple5 = {pine:"pineapple", pen:"applepen", pinePen:"pineappleapplepen"};
+		document.getElementById("test5").innerHTML = (apple5.pine);
+// Result - It gave me an error saying that loopTests() couldn't find where to do the onload.
+
+}
+//not [] but {} for an actuall asso. array; use dot notation instead of bracket notation.
+
+	</script>
+
+</head>
+
+<body onload="loopTests();">
+
+<p id="test1"></p>
+<p id="test2"></p>
+<p id="test3"></p>
+<p id="test4"></p>
+<p id="test5"></p>
+
+
+
+	
+
+</body>
+</html>
