@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Object sandboxing</title>
+	<script>
+//Happy Path - Storing simple data into local storage and then calling it -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+	function storing(){
+		localStorage.setItem("mathClass", "calculator");
+		document.getElementById("test1").innerHTML = localStorage.getItem("mathClass");
+	}
+//Result - Object is stored and then can be called out when desired.
+
+//Nasty Path - Tried to store simple data with the key being the int 2
+	function storing2(){
+		localStorage.setItem(2, "calculator");
+		document.getElementById("test2").innerHTML = localStorage.getItem("2");
+	}
+//Result - did not throw an error, saved the data with the key being 2 and was
+//         able to be recalled, even if I called it with a string of "2"
+
+//Nasty Path - Saved the data with a null element
+	function storing3(){
+		localStorage.setItem(null, "calculatorss");
+		document.getElementById("test3").innerHTML = localStorage.getItem(null);
+	}
+//Result - It was saved with null and was able to be called with "null" and null
+
+//Nasty Path - Passed null into the local storage
+function storing4(){
+		localStorage.setItem(22, null);
+		document.getElementById("test4").innerHTML = localStorage.getItem(22);
+	}
+//Result - Null was given and then it was able to be retrieved.
+
+	
+//Happy Path - Storring in session what is imputed, simple data session storage -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+	function sessStoring () {
+		var sis = document.getElementById("retrieve").value;
+		var bro = document.getElementById("retrieve2").value;
+		var dad = document.getElementById("retrieve3").value;
+		sessionStorage.setItem("sister",sis);
+		sessionStorage.setItem("brother",bro);
+		sessionStorage.setItem("father",dad);
+	}
+
+//Happy Path - Storing an array into local storage -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+	function arrayStoring () {
+		var numArray = [3,4,5,7,2,4,6,7];
+		localStorage.setItem("numArray", JSON.stringify(numArray));
+
+		var retrievedNumArray = JSON.parse(localStorage.getItem("numArray"));
+		document.getElementById("arrStored").innerHTML = retrievedNumArray[3];
+		
+	}
+
+//Nasty Path - Tried to stringify null and pass it to local storage
+	function arrayStoring2 () {
+		var numArray = [3,4,5,7,2,4,6,7];
+		localStorage.setItem("numArray", JSON.stringify(null));
+
+		var retrievedNumArray = JSON.parse(localStorage.getItem("numArray"));
+		document.getElementById("arrStored").innerHTML = retrievedNumArray[3];
+		
+	}
+
+	function arrayStoring2 () {
+		var numArray = [3,4,5,7,2,4,6,7];
+		localStorage.setItem("numArray", numArray);
+
+		// var retrievedNumArray = JSON.parse(localStorage.getItem("numArray"));
+		// document.getElementById("arrStored").innerHTML = retrievedNumArray[3];
+		
+	}
+//Result - Although null can be passed to local storrage it still cannot be strungified as per not an object
+
+//Nasty Path - put quotes around the varible name in stringify on line 71
+function arrayStoring3 () {
+		var numArray = [3,4,5,7,2,4,6,7];
+		localStorage.setItem("numArray", JSON.stringify("numArray"));
+
+		var retrievedNumArray = JSON.parse(localStorage.getItem("numArray"));
+		document.getElementById("arrStored").innerHTML = retrievedNumArray[3];
+		
+	}
+//Result - The name of the object is saved instead of the array itself and the 3rd position is called from
+//		   parsing the saved value, as if the name is now an array.  More of a fucntionality of JSON
+
+//Happy Path - Storing an associative array into local storage -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+	function assArrayStoring () {
+		var names = {a:"Allison", b:"Bennit", c:"Casper", d:"Dennys"};
+		localStorage.setItem("names", JSON.stringify(names));
+
+		var retrievedassoArray = JSON.parse(localStorage.getItem("names"));
+		document.getElementById("assStored").innerHTML = retrievedassoArray.b;
+	}
+//Happy Path - Storing Object in local storage and then retrieving it from another function without returning value. -  -  -  -  -  -  -  -  -  -  
+	function objectStoring () {
+		var watch1 = {
+			face: "Round",
+			color: "White",
+			watchDetails: function() {
+				return this.face + " " + this.color;
+			}
+		}
+		localStorage.setItem('watch1', JSON.stringify(watch1));
+	}
+	function retrieveObject () {
+	var watch1 = JSON.parse(localStorage.getItem("watch1"));
+	document.getElementById("obget").innerHTML = watch1.face;
+}
+
+
+
+
+
+
+
+		//Nasty Path, for some reason I cannot get this line of code to display anything other than NaN for the number of times that the button has been clicked.
+	function clickCounter() {
+		console.log("clickcount: " + localStorage.clickcount);
+		if (localStorage.clickcount != undefined) {
+            localStorage.clickcount = localStorage.clickcount*1+1;
+        } else {
+            localStorage.clickcount = 1;
+        }
+	
+	document.getElementById("test2").innerHTML = "This has been clicked " + localStorage.clickcount + " times.";
+
+	}
+	
+	</script>
+
+</head>
+
+<body onload="storing4();">
+<p id="test1"></p>
+<p id="test2"></p>
+<p id="test3"></p>
+<p id="test4"></p>
+<p><button onclick="clickCounter()" type="button">Click here</button></p>
+<div id="test2"></div>
+<br><br>
+
+Enter brother here: <input type="text" id="retrieve2">
+Enter sister here: <input type="text" id="retrieve">
+Enter father here: <input type="text" id="retrieve3">
+
+<button onclick="sessStoring()">Click here</button>
+<br><br>
+
+<button onclick="arrayStoring3()">Store Array</button>
+<p id="arrStored"></p>
+
+<br>
+<button onclick="assArrayStoring()">Store Associative Array</button>
+<p id="assStored"></p>
+<br><br>
+<button onclick="objectStoring()">Store Object</button>
+<button onclick="retrieveObject()">Retrieve Object</button>
+<p id="obget"></p>
+
+
+	
+
+</body>
+</html>
