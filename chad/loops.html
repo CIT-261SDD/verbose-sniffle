@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Chad Thomas">
+<title>Loops + Arrays</title>
+<script>
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+function forLoops()	{
+
+	var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	var display = "For Loop: <br>";
+	for (var i = 0; i < array.length; i++)
+	{
+		if (i != 9)
+		{
+			display += "array[" + i + "]: " + array[i] + " - ";
+		}
+		else 
+			display += "array[" + i + "]: " + array[i];
+		
+	}
+	document.getElementById("firstSection").innerHTML = display;
+}
+
+function forInLoops() {
+	var friend = 
+	[
+		"Jacob",
+		"has",
+		"something",
+		"important",
+		"he",
+		"has",
+		2,
+		"do"
+	]
+
+	var display = "For/In Loop: <br>";
+	var i;
+	for (i in friend) 
+	{
+		display += friend[i] + " ";
+	}
+	document.getElementById("secondSection").innerHTML = display
+}
+
+function whileLoop() {
+	var array = ["this array will be weird", -2, 100, 'c', "end of array"]
+	var i = 0;
+	var display = "While Loop: <br>";
+	while (i < array.length)
+	{
+		display += array[i] + " ";
+		i++;
+	}
+	document.getElementById("thirdSection").innerHTML = display
+}
+
+function doWhileLoop() {
+	var family = [
+	{
+	    name: "Jensen",
+        age: "26",
+        gender: "male"
+	},
+    {
+        name:"Chad",
+	    age:"24",
+	    gender:"male"
+    },
+    {
+        name: "Haley",
+        age: "20",
+        gender: "female"
+    },
+    {
+        name: "Ethan",
+        age: "18",
+        gender: "male"
+    },
+    {
+        name: "Hannah",
+        age: "15",
+        gender: "female"
+    }
+];
+var display = "";
+var i = 0;
+do {
+    var aFamilyMember = family[i];
+    display += "<li>" + aFamilyMember["name"] + " " 
+    		 + aFamilyMember["age"] + "</li>";
+    		 i++
+}
+while (i < family.length)
+	document.getElementById("fourthSection").innerHTML = display
+}
+
+function nastyLoopArray() {
+
+	// first lets see what happens when i put null into the array.
+	var array = [null, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+	var display = "For Loop: <br>";
+	var count = 0;
+
+	// lets also "accidentally" increment the wrong variable..
+	// this will cause your web browser to run out of memory, because
+	// it is an infinite loop. 
+	for (var i = 0; i < array.length; count++)
+	{
+		if (i != 9)
+		{
+			display += "array[" + i + "]: " + array[i] + " - ";
+		}
+		else 
+			display += "array[" + i + "]: " + array[i];
+		
+	}
+	document.getElementById("nasty").innerHTML = display;
+}
+
+function nastyLoop2() {
+	var display = "Start looping through array with -1: <br>"
+	var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+	for (var i = -1; i < array.length; i++)
+	{
+		display += array[i] + " "
+	}
+	document.getElementById("nasty").innerHTML = display;
+}
+
+addLoadEvent(forLoops);
+addLoadEvent(forInLoops);
+addLoadEvent(whileLoop);
+addLoadEvent(doWhileLoop);
+// only run this one if you want your browser to die.
+// addLoadEvent(nastyLoopArray);
+addLoadEvent(nastyLoop2);
+
+</script>
+</head>
+<body>
+	<h1>Loops + Arrays</h1>
+	<section id="firstSection"></section>
+	<section id="secondSection"></section>
+	<section id="thirdSection"></section>
+	<section id="fourthSection"></section>
+	<h2>Nasty Loops and Arrays</h2>
+	<section id="nasty"></section>
+</body>
+
+</html>

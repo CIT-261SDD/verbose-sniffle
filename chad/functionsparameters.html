@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Chad Thomas">
+<title>functions and parameters</title>
+<script>
+// this function recieves a function and puts it into the window.onload
+// or the next window.onload if there was already one.
+function addLoadEvent(func) {
+  var oldonload = window.onload;
+  if (typeof window.onload != 'function') {
+    window.onload = func;
+  } else {
+    window.onload = function() {
+      if (oldonload) {
+        oldonload();
+      }
+      func();
+    }
+  }
+}
+
+function setOutput(display) {
+	document.getElementById("output").innerHTML += display + "<br>"
+}
+
+function setNastyOutput(display) {
+	document.getElementById("nasty_output").innerHTML += display + "<br>"
+}
+
+function doSomething() {
+	var display = "This just needs to do something."
+	setOutput(display)
+	setOutput("I think this will work")
+}
+
+function doAnotherThing() {
+	var display = "I wonder if this will output correctly."
+	setOutput(display)
+}
+
+function convertTemperature()	{
+	var f = getInput("f_display")
+	if (f != "") {
+		//states variable name
+		var fahr = parseFloat(f);
+		//does calculation
+		var celsius = celseiusFromFahrenheit(fahr);
+	
+		//shows new output
+		document.getElementById("c_display").value = celsius
+	}
+	else {
+		var c = parseFloat(document.getElementById("c_display").value);
+
+		var f = fahrenheitFromCelsius(c);
+
+		document.getElementById("f_display").value = f;
+	}
+}
+
+function celseiusFromFahrenheit(fahr)
+{
+	var cels = (fahr - 32) * 5 / 9;
+	if (cels % 1 != 0) {
+		return cels.toFixed(2);
+	}
+	else 
+		return cels;
+	
+}
+
+function fahrenheitFromCelsius(cels)
+{
+	var fahr = 32 + cels * 9 / 5;
+	if (fahr % 1 != 0) {
+		return fahr.toFixed(2);	
+	}
+	else
+		return fahr;
+}
+
+function getInput(input)
+{
+	return document.getElementById(input).value
+}
+
+function convertNastyTemperature()	{
+	var f = getInput('f_nasty')
+	if (f != "") {
+		// parse the input so we can do math with it later
+		var fahr = parseFloat(f);
+		// use the cels to fahr function with the parsed input
+		var celsius = celseiusFromFahrenheit(fahr);
+	
+			// the NASTY part, innerHTML instead of value
+		document.getElementById("c_nasty").innerHTML = celsius
+	}
+	else {
+		var c = parseFloat(document.getElementById("c_nasty").value);
+
+		var f = fahrenheitFromCelsius(c);
+			// the NASTY part, innerHTML instead of value
+		document.getElementById("f_nasty").innerHTML = f;
+	}
+}
+
+addLoadEvent(doSomething);
+addLoadEvent(doAnotherThing);
+addLoadEvent(function(){
+	document.body.style.backgroundColor = "#EFDF95"
+})
+
+</script>
+</head>
+<body>
+	<h1>Functions and Parameters</h1>
+	<h2>Happy Path versions</h2>
+<input placeholder="Fahrenheit" id="f_display" size="5"><br>
+<input placeholder="Celsius" id="c_display" size="5"><br>
+<button type="button" onclick="convertTemperature() ">Convert Temp</button>
+	<section id="output"></section>
+	<h3>Nasty Paths</h3>
+<input placeholder="Fahrenheit" id="f_nasty" size="5"><br>
+<input placeholder="Celsius" id="c_nasty" size="5"><br>
+<button type="button" onclick="convertNastyTemperature() ">Convert Temp nasty</button>
+	<section id="nasty_output"></section>
+</body>
+
+</html>
