@@ -9,18 +9,39 @@ function remove() {
     
     parent.removeChild(child[2]);
     
+    
+    
     //NASTY PATH - remove a descendant of a node instead of the child
-    //document.removeChild(child[0]);
+    try{
+        document.removeChild(child[0]);
+    }
+    catch(err){
+        console.log(err.message);
+    }
     //RESULTS -fails, parent isn't child of document
     
     
+    
+    
     //NASTY PATH - call remove child w/ no input
-    //parent.removeChild();
+    try{
+        parent.removeChild();
+    }
+    catch(err){
+        console.log(err.message);
+    }
     //RESUTLS - must include a parameter
     
     
+    
+    
     //NASTY PATH - remove parent
-    //parent.removeChild(parent);
+    try{
+        parent.removeChild(parent);
+    }
+    catch(err){
+        console.log(err.message);
+    }
     //RESULTS - error - parent is not a child of parent
 }
 
@@ -64,10 +85,7 @@ function addParaBefore(){
 
     //NASTY PATH - add element before a text node
     parent.insertBefore(para, parent.firstChild);
-    // RESULTS - paragraph is added at the beginning of the div
-    
-    
-    
+    // RESULTS - paragraph is added at the beginning of the div   
 }
 
 
@@ -79,16 +97,32 @@ function append(){
     var childElement = document.createElement("p");
     
     
-    //NASTY PATH - append text node to DOM w/out parent
+    //NASTY PATH - append text node to DOM w/out element
     parent.insertBefore(textNode, sibling);
     //RESULTS - adds the text in the specified location
     
+    
+    
+    
     //NASTY PATH - append text node to text node
-    //parent.firstChild.appendChild(textNode);
+    try{
+    parent.firstChild.appendChild(textNode);
+    }
+    catch(err){
+        console.log(err.message);
+    }
     //RESULTS - text node doesn't support this type of child
     
+    
+    
+    
     //NASTY PATH - append P tag to text node
-    //parent.firstChild.appendChild(childElement);
+    try{
+        parent.firstChild.appendChild(childElement);
+    }
+    catch(err){
+        console.log(err.message);
+    }
     //RESULTS  - HierarchyRequestError - nothing worked
     
 }
