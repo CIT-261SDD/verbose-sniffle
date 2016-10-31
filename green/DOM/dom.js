@@ -3,6 +3,8 @@
 // add text node to element node
 // append new element to DOM
 
+
+
 function remove() {
     var child = document.getElementsByTagName("li");
     var parent = child[0].parentNode;
@@ -43,6 +45,17 @@ function remove() {
         console.log(err.message);
     }
     //RESULTS - error - parent is not a child of parent
+    
+    
+    
+    //HAPPY PATH - remove child -> null
+    try{
+        parent.removeChild(null);
+    }
+    catch(err){
+        console.log(err.message);
+    }
+    //RESULTS - null is not a node
 }
 
 
@@ -65,6 +78,37 @@ function addParaAfter(){
 }
 
 
+
+
+function nastyPaths(){
+    var ele = document.createElement(null);
+    var node = document.createTextNode("THIS IS NULL!!!");
+    var parent = document.getElementById("div1");
+    
+    ele.appendChild(node);
+    
+    
+    parent.appendChild(ele);
+    
+    
+    //NASTY PATH - append null element to page
+    console.log("nastyPaths ran");
+    //RESULTS - it works. nothing happens if the text node isn't there
+    
+    
+    
+    var child = document.createElement("p");
+    var node1 = document.createTextNode("I'm gonna add this everywhere!!!");
+    child.appendChild(node1);
+    
+    
+    //NASTY PATH - append one child to multiple parents
+    document.getElementById('One').appendChild(child);
+    document.getElementById('div1').appendChild(child);
+    document.getElementById('nav').appendChild(child);
+    // RESULTS - element is added to the last parent it's appended to
+    
+}
 
 
 
@@ -115,8 +159,19 @@ function append(){
     
     
     
+    //NASTY PATH - append text node to an element that shouldn't ahve text
+    try{
+        var parent1 = document.getElementById("vid1");
+        parent.appendChild(textNode);
+    }
+    catch(err){
+        console.log(err.message);
+    }
+    //RESULTS - if no video source - text is added where the video should go. If there is  video source, text is added above the tag
     
-    //NASTY PATH - append P tag to text node
+    
+    
+    //NASTY PATH - append <p> tag to text node
     try{
         parent.firstChild.appendChild(childElement);
     }
