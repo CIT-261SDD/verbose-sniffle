@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+	<h2>Using XMLHTTPRequest to Consume a JSON Web Service</h2>
+		<p id="demo"></p>
+
+	<div id="id01"></div>
+    <div id="nullURL"></div>
+    <div id="openNothing"></div>
+    <div id="nastyOpen"></div>
+    <div id="openNull"></div>
+    <div id="emptyURL"></div>
+    <div id="id02"></div>
+    <div id="id03"></div>
+
+		<script>
+
+			var xmlhttp = new XMLHttpRequest();
+			var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+			// 404 is the something is wrong status.. 200 is the site is doing well.
+
+			xmlhttp.onreadystatechange = function()
+			{
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+				{
+					myFunction(xmlhttp.responseText);
+				}
+			}
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+
+			function myFunction(response)
+			{
+				var contact = JSON.parse(response);
+				var i;
+				var out = "<table> Div 1";
+
+				for (i = 0; i < contact.length; i++)
+				{
+					out += "<tr><td>" +
+							contact[i].Name + "</td><td>" +
+							contact[i].City + "</td><td>" +
+							contact[i].Country + "</td></tr>";
+				}
+				out += "</table><br>";
+				document.getElementById("id01").innerHTML = out;
+			}
+
+            //nasty path that displays response from web server
+            // without the json.parse
+            // DIV 3
+
+            var xmlhttp3 = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttp3.onreadystatechange = function()
+            {
+                if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200)
+                {
+                    myFunction3(xmlhttp3.responseText);
+                }
+            }
+            xmlhttp3.open("GET", url, true);
+            xmlhttp3.send();
+
+            function myFunction3(response)
+            {
+                var contact = response;
+                var i;
+                var out = "<table> Div 3<tr><td>";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    // forget the member variable after contact[i]
+                    out += contact[i];
+                }
+                out += "</td></tr></table><br>";
+                document.getElementById("id03").innerHTML = out;
+            }
+
+            // nasty path: parse the data but dont format the output.
+            // just display contact[i].name without the tr and td
+            // DIV 2
+            var xmlhttp2 = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttp2.onreadystatechange = function()
+            {
+                if (xmlhttp2.readyState == 4 && xmlhttp2.status == 200)
+                {
+                    myFunction2(xmlhttp2.responseText);
+                }
+            }
+            xmlhttp2.open("GET", url, true);
+            xmlhttp2.send();
+
+            function myFunction2(response) {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 2";
+
+                for (i = 0; i < contact.length; i++) {
+                    out += contact[i].Name +
+                            contact[i].City +
+                            contact[i].Country;
+                }
+                out += "</table><br>";
+                document.getElementById("id02").innerHTML = out;
+            }
+
+            //nasty path that displays response from web server
+            // without the json.parse
+            // DIV 3
+
+            var xmlhttp3 = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttp3.onreadystatechange = function()
+            {
+                if (xmlhttp3.readyState == 4 && xmlhttp3.status == 200)
+                {
+                    myFunction3(xmlhttp3.responseText);
+                }
+            }
+            xmlhttp3.open("GET", url, true);
+            xmlhttp3.send();
+
+            function myFunction3(response)
+            {
+                var contact = response;
+                var i;
+                var out = "<table> Div 3<tr><td>";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += contact[i];
+                }
+                out += "</td></tr></table><br>";
+                document.getElementById("id03").innerHTML = out;
+            }
+
+
+            // put bob in the open method ********* NASTY ******************
+            var xmlhttpBob = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttpBob.onreadystatechange = function()
+            {
+                if (xmlhttpBob.readyState == 4 && xmlhttpBob.status == 200)
+                {
+                    myFunction(xmlhttpBob.responseText);
+                }
+            }
+            xmlhttpBob.open("bob", url, true);
+            xmlhttpBob.send();
+
+            function myFunction(response)
+            {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 1";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += "<tr><td>" +
+                            contact[i].Name +
+                            "</td><td>" +
+                            contact[i].City +
+                            "</td><td>" +
+                            contact[i].Country +
+                            "</td></tr>";
+                }
+                out += "</table><br>";
+                document.getElementById("nastyOpen").innerHTML = out;
+            }
+
+            // what if string was empty in the open method
+            var xmlhttpEmpty = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttpEmpty.onreadystatechange = function()
+            {
+                if (xmlhttpEmpty.readyState == 4 && xmlhttpEmpty.status == 200)
+                {
+                    myFunction(xmlhttpEmpty.responseText);
+                }
+            }
+            xmlhttpEmpty.open("", url, true);
+            xmlhttpEmpty.send();
+
+            function myFunction(response)
+            {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 1";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += "<tr><td>" +
+                            contact[i].Name +
+                            "</td><td>" +
+                            contact[i].City +
+                            "</td><td>" +
+                            contact[i].Country +
+                            "</td></tr>";
+                }
+                out += "</table><br>";
+                document.getElementById("openNothing").innerHTML = out;
+            }
+
+            // what if string was null in the open method
+            var xmlhttpNull = new XMLHttpRequest();
+            var url = "http://www.w3schools.com/website/customers_mysql.php";
+
+            xmlhttpNull.onreadystatechange = function()
+            {
+                if (xmlhttpNull.readyState == 4 && xmlhttpNull.status == 200)
+                {
+                    myFunction(xmlhttpNull.responseText);
+                }
+            }
+            xmlhttpNull.open(null, url, true);
+            xmlhttpNull.send();
+
+            function myFunction(response)
+            {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 1";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += "<tr><td>" +
+                            contact[i].Name +
+                            "</td><td>" +
+                            contact[i].City +
+                            "</td><td>" +
+                            contact[i].Country +
+                            "</td></tr>";
+                }
+                out += "</table><br>";
+                document.getElementById("openNull").innerHTML = out;
+            }
+
+            // what if url was empty/ null/ or an invalid page, invalid server.
+            var xmlhttpurl = new XMLHttpRequest();
+            var url = "";
+
+            xmlhttpurl.onreadystatechange = function()
+            {
+                if (xmlhttpurl.readyState == 4 && xmlhttpurl.status == 200)
+                {
+                    myFunction(xmlhttpurl.responseText);
+                }
+            }
+            xmlhttpurl.open("GET", url, true);
+            xmlhttpurl.send();
+
+            function myFunction(response)
+            {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 1";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += "<tr><td>" +
+                            contact[i].Name +
+                            "</td><td>" +
+                            contact[i].City +
+                            "</td><td>" +
+                            contact[i].Country +
+                            "</td></tr>";
+                }
+                out += "</table><br>";
+                document.getElementById("emptyURL").innerHTML = out;
+            }
+
+            // what if url was  null/ or an invalid page, invalid server.
+            var xmlhttNull = new XMLHttpRequest();
+            var url = null;
+
+            xmlhttNull.onreadystatechange = function()
+            {
+                if (xmlhttNull.readyState == 4 && xmlhttNull.status == 200)
+                {
+                    myFunction(xmlhttNull.responseText);
+                }
+            }
+            xmlhttNull.open("GET", null, true);
+            xmlhttNull.send();
+
+            function myFunction(response)
+            {
+                var contact = JSON.parse(response);
+                var i;
+                var out = "<table> Div 1";
+
+                for (i = 0; i < contact.length; i++)
+                {
+                    out += "<tr><td>" +
+                            contact[i].Name +
+                            "</td><td>" +
+                            contact[i].City +
+                            "</td><td>" +
+                            contact[i].Country +
+                            "</td></tr>";
+                }
+                out += "</table><br>";
+                document.getElementById("nullURL").innerHTML = out;
+            }
+
+
+        </script>
+</body>
+</html>
