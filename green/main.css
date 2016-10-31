@@ -1,0 +1,43 @@
+button{
+    padding:5px;
+    margin: 5px;
+    width:135px;
+}
+nav ul li{
+    padding: 15px;
+    width: 200px;
+    font-size: 14pt;
+    border-bottom: solid;
+    color: white;
+}
+nav ul li.list{
+    background-color: darkorange;
+}
+nav ul li.green{
+    background-color: green;
+}
+nav ul li.purple{
+    background-color: rebeccapurple;
+}
+nav ul li.aqua{
+    background-color: aqua;
+    color:black;
+}
+nav ul li.newList{
+    background-color:crimson;
+}
+div#div1 p{
+    background-color: saddlebrown;
+    color:white;
+    padding: 15px;
+    width:750px;
+    font-size: 16pt;
+}
+div#div1 p.before{
+    background-color: forestgreen;
+    color:white;
+}
+div#div1 p.after{
+    background-color: skyblue;
+    color:white;
+}

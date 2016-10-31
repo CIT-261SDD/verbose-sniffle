@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM Manipulation</title>
+    <script src="dom.js"></script>
+    <script src="innerHTML.js"></script>
+    <link rel="stylesheet" href="main.css" type="text/css">
+</head>
+<body onload="log()">
+    <h1>DOM Manipulation</h1>
+    <a href="../index.html">Home</a><br>
+    
+    <button onclick="append()">Append Child</button>
+    <hr>
+    
+    
+    <button onclick="remove()">Remove Element</button>Referenced by tag name<br>
+    <button onclick="changeColor()">Change Color</button>Referenced by ID<br>
+    <button onclick="changeOddColors()">Change Odd Colors</button>Referenced by class<br>
+    <button onclick="changeAllColors()">Change All Colors</button>Referenced using document.querySelectorAll('nav ul li')<br>
+    <button onclick="replaceNav()">Replace the Nav</button>Using innerHTML<br>
+    <nav id="nav">
+    <ul>
+        <li class="list" id="One">One</li>
+        <li class="list" id="Two">Two</li>
+        <li class="list" id="Three">Three</li>
+        <li class="list" id="Four">Four</li>
+        <li class="list" id="Five">Five</li>
+    </ul>
+    </nav>
+    
+    
+    <hr>
+    
+    
+    <button onclick="addParaBefore()">Insert Before 2</button><br>
+    <button onclick="addParaAfter()">Insert After 3</button><br>
+    
+    <div id="div1">
+        <p id="p1">This is paragraph 1.</p>
+        <p id="p2">This is paragraph 2.</p>
+        <p id="p3">This is paragraph 3.</p>
+        
+    </div>
+</body>
+</html>
