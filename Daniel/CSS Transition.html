@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="main.css">
+
+</head>
+
+<body>
+<script type="text/javascript">
+function colorChange(){
+    
+    var color = document.getElementById("box2")
+	color.style.background = "blue";
+	color.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	color.style.transitionDuration = "3s";       // Standard syntax
+	}
+	
+function sizeChange(){
+    
+    var size = document.getElementById("box3")
+	size.style.width = "300px";
+	size.style.height = "300px";
+	size.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	size.style.transitionDuration = "3s";       // Standard syntax
+	}
+
+function rotateChange(){
+    
+    var rotate = document.getElementById("box4")
+	rotate.style.transform = "rotate(180deg)"; 
+	rotate.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	rotate.style.transitionDuration = "3s";       // Standard syntax
+	}
+	
+function change() {
+	var color = document.getElementById("box5")
+	color.style.background = "blue";
+	color.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	color.style.transitionDuration = "3s";       // Standard syntax
+	var size = document.getElementById("box5")
+	size.style.width = "300px";
+	size.style.height = "300px";
+	size.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	size.style.transitionDuration = "3s";       // Standard syntax
+	var rotate = document.getElementById("box5")
+	rotate.style.transform = "rotate(180deg)"; 
+	rotate.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	rotate.style.transitionDuration = "3s";       // Standard syntax
+	
+}
+</script>
+<button onclick="colorChange()">Color</button>
+<div id="box2"></div><br>
+<button onclick="sizeChange()">Size</button>
+<div id="box3"></div><br>
+<button onclick="rotateChange()">Rotate</button>
+<div id="box4"></div><br>
+<button onclick="change()">Change</button>
+<div id="box5"></div>
+</body>
+</html>
