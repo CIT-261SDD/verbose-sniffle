@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="CSS.css">
+
+</head>
+
+<body>
+<script type="text/javascript">
+
+function colorChange(){
+    
+    var cc = document.getElementById("box2")
+	cc.style.animation = "color 5s 3";
+	}
+
+function locationChange(){
+    
+    var lc = document.getElementById("box3")
+	lc.style.animation = "location 5s 3";
+	}
+	
+function sizeChange(){
+    
+    var sc = document.getElementById("box4")
+	sc.style.animation = "size 5s 3";
+	}
+	
+function ballBounce(){
+    
+    var bb = document.getElementById("ball")
+	bb.style.animation = "bounce 2s 5";
+	}
+	
+</script>
+<button onclick="colorChange()">Color</button>
+<div id="box2"></div><br>
+<button onclick="locationChange()">Location</button>
+<div id="box3"></div><br>
+<button onclick="sizeChange()">Size</button>
+<div id="box4"></div><br>
+<button onclick="ballBounce()">Bounce</button>
+<div id="ball"></div><br>
+</body>
+</html>
