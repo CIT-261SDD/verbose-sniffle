@@ -1,0 +1,152 @@
+<!-- createElement, appendChild, inseartBefore, removeChild -->
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>DOM</title>
+<script type="text/javascript">
+
+	
+
+	function creation() {
+		
+		var para = document.createElement("P");
+		var txt = document.createTextNode("example text");
+		para.appendChild(txt);
+		document.body.appendChild(para);
+	}
+	//Nasty Code - tried to pass null in the appendChild
+	function creation2() {
+		
+		var para = document.createElement("P");
+		var txt = document.createTextNode("example text");
+		try {
+		para.appendChild(null);
+	}
+	catch (err) {
+		console.log(err.message);
+	}
+		document.body.appendChild(para);
+	
+	}
+	//Result - returned this error: Argument 1 ('node') to Node.appendChild must be an instance of Node
+
+	//Nasty Path - Tried to pass P in the document.createElement without it being a string
+	function creation3() {
+		
+		try {
+		var para = document.createElement(P);
+
+
+		var txt = document.createTextNode("example text");
+		para.appendChild(txt);
+		document.body.appendChild(para);
+
+		}
+	catch (err) {
+		console.log(err.message);
+	}
+	}
+	//Result - Can't find variable: P
+
+	//Nasty Path - Switched the paragraph element and the text element in the append Child
+	function creation4() {
+		
+		var para = document.createElement("P");
+		var txt = document.createTextNode("example text");
+		try {
+		txt.appendChild(para);
+		}
+	catch(err) {
+		console.log(err.message);
+	}
+		document.body.appendChild(para);
+	}
+	//returned the error of: The operation would yield an incorrect node tree.
+
+	function removing() {
+		var child = document.getElementsByTagName("li");
+		var parent = child[1].parentNode;
+		parent.removeChild(child[0]);
+	}
+//Nasty Path
+	function removing2() {
+		var child = document.getElementsByTagName("li");
+		var parent = child[1].parentNode;
+		try {
+		parent.removeChild(child[null]);
+	}
+	catch (err){
+		console.log(err.message);
+	}
+	}
+	// Returned error: Argument 1 ('child') to Node.removeChild must be an instance of Node
+
+	function inserting() {
+		
+		var liItem = document.createElement("LI");
+	    var txt = document.createTextNode("Test");
+	    liItem.appendChild(txt);
+
+
+	    var list = document.getElementById("firstList");
+	    list.insertBefore(liItem, list.childNodes[0]);
+
+	}
+//Nasty Path - 
+	function inserting2() {
+		
+		var liItem = document.createElement("LI");
+	    var txt = document.createTextNode("Test");
+	    liItem.appendChild(txt);
+
+
+	    var list = document.getElementById("firstList");
+	    list.insertBefore(txt, list.childNodes[0]);
+
+	}
+
+
+	
+	
+</script>
+
+</head>
+<body>
+    <h3>DOM Manipulation</h3>
+    <div>
+    	<button onclick="removing()">removeChild</button>
+    	<button onclick="removing2()">removeChild2</button>
+    </div>
+   <p id="first">
+   	<video controls="">
+   		<source src="testVideo.mp4" type="">
+   		<ul id="firstList">
+   		<li>sdf</li>
+   		<li>fds</li>
+   		</ul>
+   	</p>
+   
+   	</div>
+   	<button onclick="creation()">Creation</button>
+   	<button onclick="creation2()">Creation2</button>
+   	<button onclick="creation3()">Creation3</button>
+   	<button onclick="creation4()">Creation4</button>
+	<div id="second">
+	<button onclick="inserting()">Insert before</button>
+	<button onclick="inserting2()">Insert before2</button>
+   </div>
+   <div id="third">
+   	<ui>
+   	<li>content</li>
+   	<li>more content</li>
+   	<li>more more content</li>
+   	</ui>
+   	
+   </div>
+
+</body>
+<footer>
+	
+</footer>
+</html>
