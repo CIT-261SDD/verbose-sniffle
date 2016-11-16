@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Chad Thomas">
+<title>Journal</title>
+<script type="text/javascript">
+function saveNote()	{
+	
+	var currentDateAndTime = new Date()
+	var aNoteDescription = document.getElementById("description_input")
+	var aNoteText = document.getElementById("note_editor")
+	var aCompleteNote = currentDateAndTime.toLocaleString() + "--" + aNoteDescription.value
+	aCompleteNote += "<p>" + aNoteText.value + "</p>"
+
+	var storedNotesString = localStorage.getItem("all_notes")
+	var allNotes = JSON.parse(storedNotesString)
+
+	if ( allNotes == null)
+	{
+		allNotes = []
+	}
+	
+	allNotes.push(aCompleteNote)
+	var allNotesString = JSON.stringify(allNotes)
+	localStorage.setItem("all_notes", allNotesString)
+	showAllNotes()
+	aNoteDescription.value = null
+	aNoteText.value = null
+	}
+function showAllNotes() {
+	//get all of the notes from local storage
+	var storedNotesString = localStorage.getItem("all_notes")
+
+	// right now they're all a string, parse them into an array
+	var allNotes = JSON.parse(storedNotesString)
+	
+	// if there is nothing in the array, do nothing.
+	// if there is something do stuff with it.
+	if(allNotes != null){
+		
+		//create a variable that holds whatever is in the all_notes_display section
+		var noteDisplayer = document.getElementById("all_notes_display")
+		
+		// clear out that section real quick just in case something is already there.
+		noteDisplayer.innerHTML = null
+		
+		// loop through as many elements of notes you find
+		var top = allNotes.length - 1
+		for (var i = top; i >= 0; i--)
+		{
+			// put a single element of the allNotes array into a variable
+			var aNote = allNotes[i]
+			// append that note variable to the variable that holds the 
+			// "all_notes_display" section, and do it as a new paragraph.
+			// the <hr> tag creates a line accross the page horizontal. its nice.
+			// it also doesnt need a closing tag.
+			noteDisplayer.innerHTML += "<hr><p>" + aNote + "</p>"
+		}
+	}
+}
+
+</script>
+
+<style type="text/css">
+	body{
+		/*background-color: LightGrey;*/
+	}
+	input{
+		border: none;
+		border-radius: 100px;
+		box-shadow: 0px 0px 5px #666666 inset;
+		height: 25px;
+		width: 200px;
+		text-indent: 10px;
+	}
+	input:focus{
+		outline:none;
+	}
+	#note_entry_area{
+		background-color: LightGreen;
+		width: 500px;
+		padding-left: 5px;
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px #666666 inset;
+		text-indent: 5px;
+	}
+	textarea{
+		margin-top: 10px;
+		border:none;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px #666666 inset;
+		width: 90%;
+		height: 150px;
+		text-indent: 5px;
+		resize: none;
+		overflow: scroll;
+	}
+	#all_notes_display{
+		background-color: LightGrey;
+		padding-left: 5px;
+		box-shadow: 0px 0px 5px #666666 inset;
+	}
+</style>
+
+</head>
+<body onload="showAllNotes()">
+	<section id="note_entry_area">
+		<h1>Note It!</h1>
+		Description: <input id="description_input"></input>
+		<textarea id="note_editor" placeholder="Note it down. Don't forget."></textarea>
+			<button onclick="saveNote() ">Save</button>
+			
+	</section>
+	<section id="all_notes_display"></section>
+</body>
+</html>

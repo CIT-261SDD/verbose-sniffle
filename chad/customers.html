@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="author" content="Chad Thomas">
+<title>Customers and junk</title>
+
+<script src="customer.js"></script>
+
+<link rel="stylesheet" href="customer_style.css">
+
+</head>
+<body onload="showAllCustomers()">
+<section id="customer_entry_area">
+	
+	<h1 style="color:blue;">Our Clothing Customers</h1>
+		<input type="text" placeholder="Name" id="name_input"></input>
+		<input type="text" placeholder="Age" id="age_input"></input>
+		<input type="text" placeholder="Inseam" id="inseam_input"></input>
+		<br>
+		<img src="add_customer.png" onclick="addAndSaveCustomer() "></img>
+</section>
+	<section id="all_customers_display"></section>
+</body>
+</html>
