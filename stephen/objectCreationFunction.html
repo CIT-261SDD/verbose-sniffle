@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>Object sandboxing</title>
+	<script>
+	
+
+//Actuall Opject creation with ***Inheritance** function. call, Properties, Methods, and Instantiation------------------------------------
+//--------------------------------------------------------------------------------------------------------------------
+
+	function Ring(aType, aColor, aSize, aMetal) {
+		this.type = aType;
+		this.color = aColor;
+		this.size = aSize;
+		this.metal = aMetal;	
+	}
+	function ringTesting (){
+//Properties being added to an instance - Ring = instance, ('','','') = properties
+	var gloriousRing = new Ring('Square', 'Black', 9, 'Tungsten');
+	var ringRingRing = new Ring('Round', 'White', 8, 'Stanless Steel');
+	var bouncyRing = new Ring('Round', 'Gold', 8.5, 'Rubber');
+//Adding property to the instance without there being that property in the first place - flexibility
+//This only works on an instance of the object and not the "prototype" of the object
+	bouncyRing.gender = "Neutral";
+	var listOfMetals = gloriousRing.metal + ", " + ringRingRing.metal + ", " + bouncyRing.metal;
+	
+	console.log(listOfMetals);
+	document.getElementById("glor").innerHTML = listOfMetals;
+	document.getElementById("glor2").innerHTML = bouncyRing.gender;
+	}
+//------------------------------------------------------------------------------------------	
+//Nasty Path - line 35, 39, and 40 have null in as properties, all worked
+	function ringTesting2 (){
+	var gloriousRing = new Ring('Square', 'Black', 9, null);
+	var ringRingRing = new Ring('Round', 'White', 8, 'Stanless Steel');
+	var bouncyRing = new Ring('Round', 'Gold', 8.5, 'Rubber');
+
+	bouncyRing.gender = null;
+	bouncyRing.null = "will see";
+	var listOfMetals = gloriousRing.metal + ", " + ringRingRing.metal + ", " + bouncyRing.metal;
+	
+	console.log(listOfMetals);
+	document.getElementById("glor2").innerHTML = listOfMetals + "<br>" + bouncyRing.gender + "<br>" + bouncyRing.null;
+	}
+
+//Nasty Path - 	line 50 took away the . after this.color, became undefined
+//*****Nasty Path******* - Code will nolonger work now, I put null in as a parameter name, this cannot work, breakes when function is run. line 49, 52, 66
+// 	try{
+// 	function Ring3(aType, null, aSize, aMetal) {
+// 		this.type = aType;
+// 		thiscolor = aColor;
+// 		this.null = null;
+// 		this.metal = aMetal;
+// //Method creation
+// 		this.typeColor = function() {
+// 			return this.type + this.color;
+// 			}
+		
+// 	}
+// }
+// catch(err){
+// 	console.write(err.message);
+// }
+// 	function ringTesting3 (){
+// 	var gloriousRing = new Ring3('Square', 'Black', 9, 'Tungsten');
+// 	var ringRingRing = new Ring3('Round', 'White', 8, 'Stanless Steel');
+// 	var bouncyRing = new Ring3('Round', 'Gold', 8.5, 'Rubber');
+// // 
+// 	console.log(bouncyRing.typeColor());
+// 	console.log(ringRingRing.null)
+
+// 	bouncyRing.gender = "Neutral";
+// 	var listOfMetals = gloriousRing.metal + ", " + ringRingRing.metal + ", " + bouncyRing.metal;
+	
+// 	console.log(listOfMetals);
+// 	document.getElementById("glor3").innerHTML = listOfMetals;
+// 	document.getElementById("glor4").innerHTML = bouncyRing.gender;
+// 	}
+
+
+
+// 	function Jewelery(funct, appeal){
+// 		this.funct = funct;
+// 		this.appeal = appeal;
+// 	}
+
+// 	function iRing(aType, aColor, aSize, aMetal) {
+// 		Jewelery.call(this, funct, appeal);
+// 	}
+// 	function iringTesting (){
+// //Properties being added to an instance - Ring = instance, ('','','') = properties
+// 	var gloriousRing = new iRing('Square', 'Black', 9, 'Tungsten');
+// 	var ringRingRing = new iRing('Round', 'White', 8, 'Stanless Steel');
+// 	var bouncyRing = new iRing('Round', 'Gold', 8.5, 'Rubber', 'finger', 'flashy');
+
+// 	console.log(bouncyRing.function + " , " + bouncyRing.appeal);
+
+// 	}
+
+function Product(name, price) {
+  this.name = name;
+  this.price = price;
+}
+
+function Food(name, price) {
+  Product.call(this, name, price);
+  this.category = 'food';
+}
+
+function Toy(name, price) {
+  Product.call(this, name, price);
+  this.category = 'toy';
+}
+
+function iringTesting() {
+	var pizza = new Food('Junk', 10);
+	var train = new Toy('Rail Car', 8);
+
+	console.log(pizza.name + " , " + train.price);
+}
+
+
+function Product1(a) {
+  Food1.call(this, a);
+
+}
+
+function Food1(a) {
+    Toy1.call(this, a);
+}
+
+function Toy1(a) {
+    Product1.call(this, a);
+}
+
+function ringTesting22() {
+	var train = new Toy1(1)
+	console.log(Toy1.a)
+}
+	
+	
+//look up pattern way of doing object creation
+
+
+
+
+
+
+	</script>
+
+</head>
+
+<body>
+<p id="metalList"></p>
+<button onclick="ringTesting()">Click</button>
+<p id="glor">
+</p>
+<button onclick="ringTesting2()">Click</button>
+<p id="glor2">
+</p>
+<button onclick="ringTesting3()">Click</button>
+<p id="glor3">
+</p>
+<button onclick="ringTesting3()">Click</button>
+<p id="glor4">
+</p>
+<button onclick="iringTesting()">iClick</button>
+<p id="iglor">
+</p>
+<button onclick="ringTesting22()">Clickloop</button>
+<p id="iglor2">
+</p>
+	
+
+</body>
+</html>
