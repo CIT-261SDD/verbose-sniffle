@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title>*-*Events Sandboxing</title>
+	<script>
+
+	function gTimeStart() {
+		document.getElementById('test').innerHTML = Date();
+	}
+	function gTime() {
+		document.getElementById('test1').innerHTML = Date();
+	}
+	function gTime2() {
+		document.getElementById('test2').innerHTML = Date();
+	} 
+	function gTime3() {2
+		document.getElementById('test3').innerHTML = Date();
+	}
+	function txtBox(txtRecieved) {
+	 	var txtRecieved = document.getElementById('textInBox').value;
+	 	var a = txtRecieved.match(/diana/g);
+	 	if (txtRecieved = a) {
+	 		document.getElementById('textInBox').style.backgroundColor = "green";
+	 	} else {
+	 		document.getElementById('textInBox').style.backgroundColor = "red";
+	 	}
+	 	return txtRecieved;
+	 } 
+	 function txtBoxReturn() {
+	 	txtRecieved = txtBox(txtRecieved);
+	 	document.getElementById('text4').innerHTML = txtRecieved;
+	 }
+
+
+	</script>
+
+</head>
+
+<body onload="gTimeStart()">
+<div>
+	<p>
+		<button onclick="gTime()">Time</button>
+		<button onfocus="gTime2()">Time Over</button>
+		<button onmousemove="gTime3()">Time Move</button>
+		<input id="textInBox" type="text" onkeyup="txtBox()" ="gTime4()"><button onmouseleave="txtBoxReturn()">Time Move button</button></input>
+		<br>
+		<!--Nasty path - Tried to have a button down for a picture, there is no way to make that work 
+
+		******* ontouch *******-->
+		<img src="salsa.jpeg" width="10%" height="10%" onkeydown="txtBox()">
+	</p>
+	<p id="test"></p>
+	<p id="test1"></p>
+	<p id="test2"></p>
+	<p id="test3"></p>
+	<p id="test4"></p>
+	<p id="test5"></p>
+	
+</div>
+
+</body>
+</html>
