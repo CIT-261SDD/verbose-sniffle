@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML5 input </title>
+    <script type='text/javascript'>
+ 
+    var canvas;
+    var ctx;
+    var lastPt = null;
+
+function init() {
+  
+  // get a reference to out touch-sensitive element
+  var touchzone = document.getElementById("mycanvas")
+  // add an event handler for the touchstart event
+  touchzone.addEventListener("touchmove", draw, false);
+  touchzone.addEventListener("touchend", endTouch, false);
+  ctx = touchzone.getContext("2d");
+}
+
+function endTouch(e)
+{
+  e.preventDefault();
+  lastPt=null;
+}
+
+function draw() {
+      event.preventDefault();
+ 
+      
+
+      if(lastPt != null) {
+
+        ctx.beginPath();
+        // start at previous point
+        ctx.moveTo(lastPt.x, lastPt.y);
+        // line to latest point
+        ctx.lineTo(event.touches[0].pageX, 
+          event.touches[0].pageY);
+        // draw it
+        ctx.stroke();
+    }
+        //Store latest touchpoint
+        lastPt = {x:event.touches[0].pageX
+            , y:event.touches[0].pageY};
+
+        //ctx.fillRect(event.touches[0].pageX, event.touches[0].pageY, 5, 5);
+      
+    }
+
+function getOffset(obj) {
+  var offsetLeft = 0;
+  var offsetTop = 0;
+  do {
+    if (!isNaN(obj.offsetLeft)) {
+      offsetLeft += obj.offsetLeft;
+    }
+    if (!isNaN(obj.offsetTop)) {
+      offsetTop += obj.offsetTop;
+    }   
+  } while(obj = obj.offsetParent );
+  return {left: offsetLeft, top: offsetTop};
+}   
+
+    </script>
+
+  <style>
+#mycanvas{
+  border-style: solid;
+  border-color: red;
+}
+</style>
+
+  </head>
+  <body onload="init()">
+    <canvas id="mycanvas" width="500" height="500">
+      Canvas element not supported.
+    </canvas>
+  </body>
+</html>
