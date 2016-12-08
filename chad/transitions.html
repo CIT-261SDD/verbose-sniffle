@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style type="text/css">
+	div {
+    width: 150px;
+    height: 150px;
+    background: red;
+}
+</style>
+</head>
+<body>
+<script type="text/javascript">
+function colorChange(){
+    if (arguments[0] != null){
+    	var color = document.getElementById(arguments[0])
+    }
+    else{
+    	var color = document.getElementById("box2")
+    }
+    
+	color.style.background = "blue";
+	color.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	color.style.transitionDuration = "3s";       // Standard syntax
+	}
+	
+function sizeChange(){
+    if (arguments[0] != null){
+    	var size = document.getElementById(arguments[0])
+    }
+    else{
+    	var size = document.getElementById("box3")
+    }
+
+	size.style.width = "300px";
+	size.style.height = "300px";
+	size.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	size.style.transitionDuration = "3s";       // Standard syntax
+	}
+function rotateChange(){
+    if (arguments[0] != null){
+    	var rotate = document.getElementById(arguments[0])
+    }
+    else{
+    	var rotate = document.getElementById("box4")
+    }
+    
+	rotate.style.transform = "rotate(180deg)"; 
+	rotate.style.WebkitTransitionDuration = "3s"; // Code for Safari 3.1 to 6.0
+	rotate.style.transitionDuration = "3s";       // Standard syntax
+	}
+	
+function change() {
+	colorChange('box5')
+	sizeChange('box5')
+	rotateChange('box5')
+}
+
+function blah() {
+	colorChange('box6')
+	sizeChange('box6')
+}
+
+</script>
+<button onclick="colorChange()">Color</button>
+<div id="box2"></div><br>
+<button onclick="sizeChange()">Size</button>
+<div id="box3"></div><br>
+<button onclick="rotateChange()">Rotate</button>
+<div id="box4"></div><br>
+<button onclick="change()">All</button>
+<div id="box5"></div><br>
+<button onclick="blah()">new</button>
+<div id="box6"></div>
+</body>
+</html>
