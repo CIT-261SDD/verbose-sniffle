@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function buttonClick() {
+      document.getElementById("box1").style.animation = "pulsing 1s linear infinite";
+    }
+
+  </script>
+<style>
+  .boxes {
+    background-color: rgb(227,227,227);
+    width: 120px;
+    height: 120px;
+    border-radius: 150px;
+
+  }
+  #box2 {
+    background-color: white;
+  }
+  .testLogos {
+    max-width:100%;
+    max-height:100%;
+  }
+  @keyframes "pulsing" {
+      0% {
+       	transform: scale(1.1);
+     }
+      50% {
+       	transform: scale(0.8);
+     }
+      100% {
+       	transform: scale(1);
+     }
+
+
+
+</style>
+</head>
+<body>
+  <a href="AnimationLibrary.html">
+  <div onmousedown ="buttonClick()" id="box1" class="boxes">
+    <img src="exampleLogo.png" id="testLogo" class="testLogos"/>
+  </div>
+</a>
+</body>
+</html>

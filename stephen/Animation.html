@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<title></title>
+<style type="text/css">
+	div {
+		float: left;
+	}
+	#box2 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
+
+@keyframes color {
+    0%   {background: red;}
+    25%  {background: green;}
+    100%  {background: white;}
+}
+
+#box3 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+	position: relative;
+}
+
+@keyframes location {
+    -50%   {top: 0px; left: 0px;}
+    50%  {top: 0px; left: 100px;}
+    100%  {top: 0; left: 0;}
+
+}
+
+#box4 {
+    width: 100px;
+    height: 100px;
+    background: blue;
+}
+
+@keyframes size{
+    0%   {width: 100px; height: 100px;}
+    10%  {width: 100px; height: 300px;}
+    20%  {width: 450px; height: 150px;}
+    30%  {width: 100px; height: 700px;}
+    35% {width: 10px; height: 1000px;}
+    40%  {width: 1500px; height: 30px;}
+    50%  {width: 40px; height: 550px;}
+    60%  {width: 300px; height: 200px;}
+    65% {width: 800px; height: 10px;}
+    70%  {width: 100px; height: 300px;}
+    80%  {width: 40px; height: 750px;}
+    90%  {width: 200px; height: 400px;}
+    100% {width: 100px; height: 100px;}
+}
+
+#ball {
+	width: 100px;
+	height: 100px;
+	background: blue;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+}
+
+@keyframes bounce {
+    0%   {top: 0px;}
+    25%  {top: 100px;}
+    50%  {top: 0px;}
+}
+</style>
+<script type="text/javascript">
+function colorChange(){
+    
+    var cc = document.getElementById("box2")
+	cc.style.animation = "color 5s 1";
+	cc.style.animationFillMode = "forwards";
+	}
+function locationChange(){
+    
+    var lc = document.getElementById("box3")
+	lc.style.animation = "location 1 2s";
+	lc.style.animationFillMode = "forwards";
+	}
+	
+function sizeChange(){
+    
+    var sc = document.getElementById("box4")
+	sc.style.animation = "5s 1 size";// Nasty Path - Mixed up the order of the animation commands
+	sc.style.animationFillMode = "forwards";
+	}
+	
+function ballBounce(){
+    
+    var bb = document.getElementById("ball")
+	bb.style.animation = "bounce 4s 1";
+	bb.style.animationFillMode = "forwards";
+	}
+	//Reset the state
+</script>
+
+</head>
+
+<body>
+
+
+<div onmouseenter="colorChange()" id="box2"></div><br>
+<div onmouseenter="locationChange()" id="box3"></div><br>
+<div onmouseenter="sizeChange()" id="box4"></div><br>
+<div onmouseenter="ballBounce()" id="ball"></div><br>
+</body>
+</html>
