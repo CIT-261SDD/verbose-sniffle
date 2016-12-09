@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script type="text/javascript">
+// this file should be an event triggered by html that uses javascript
+// to change css with some animation.
+var id = 1;
+function addCheck(myDiv)
+{
+	var pic = document.createElement("img")
+	pic.src = 'check.jpg'
+	pic.id = id++;
+	pic.class = "check"
+
+	var div = document.getElementById(myDiv)
+	div.appendChild(pic)
+
+	div.style.position = "relative"
+	div.style.width = "50px"
+
+	pic.onclick = function()
+		{
+			pic.style.animation = "bounce 1s 1"
+		}
+}
+
+</script>
+
+<style type="text/css">
+
+	img {
+		width: 30px;
+		height: 30px;
+		float: right;
+		position: relative;
+	}
+
+	.check {
+	width: 100px;
+	height: 100px;
+	background: red;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	position: relative;
+}
+
+@keyframes bounce {
+    0%   {top: 0px;}
+	25%  {top: 20px;}
+	50%  {top: 0px;}
+	75%  {top: 5px;}
+	100% {top: 0px;}
+}
+</style>
+
+</head>
+<body>
+
+<button onClick="addCheck('first')">Snapchat</button>
+<div id="first"></div><br>
+
+</body>
+
+</html>
